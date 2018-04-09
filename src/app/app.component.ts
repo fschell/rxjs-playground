@@ -20,15 +20,16 @@ export class AppComponent implements OnInit, OnDestroy {
     // This means the console will keep on logging
     // This is a classic example of a memory-leak
     const subscription = interval$
-      .do( (val) => console.log(val))
+      .do( (val) => console.log('do  ' + val))
       .pipe(
         skip(1),
         take(5),
-        tap( v => console.log(v)),
+        tap( v => console.log('tap ' + v)),
         filter(v => v % 2 === 0),
         map( v => v + 1)
       )
-      .subscribe(console.log);
+      .subscribe( v => console.log('sub ' + v));
+
     this.subscriptions.push(subscription);
   }
   ngOnDestroy() {
