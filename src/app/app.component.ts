@@ -17,7 +17,7 @@ export class AppComponent implements OnInit, OnDestroy {
     const interval$ = Observable.interval(1000);
 
     const subscription = interval$
-      .do( (val) => console.log('do  ' + val))
+      .do( (val) => console.log('do  ' + val))      // 0--1---2---3---4---5---6---7...
       .pipe(
         skip(1),                              // ---1---2---3---4---5---6---7...
         take(5),                              // ---1---2---3---4---5|
