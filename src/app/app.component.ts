@@ -14,7 +14,7 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit() {
     // The following stream will produce values every second
     // 0--1--2--3--4--5--6--...
-    const interval$ = new Observable.interval(1000);
+    const interval$ = Observable.interval(1000);
     // Even when this component gets destroyed,
     // the stream will keep producing values...
     // This means the console will keep on logging
