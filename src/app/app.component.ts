@@ -15,18 +15,15 @@ export class AppComponent implements OnInit, OnDestroy {
     // The following stream will produce values every second
     // 0--1--2--3--4--5--6--...
     const interval$ = Observable.interval(1000);
-    // Even when this component gets destroyed,
-    // the stream will keep producing values...
-    // This means the console will keep on logging
-    // This is a classic example of a memory-leak
+
     const subscription = interval$
       .do( (val) => console.log('do  ' + val))
       .pipe(
-        skip(1),
-        take(5),
+        skip(1),                              // ---1---2---3---4---5---6---7...
+        take(5),                              // ---1---2---3---4---5|
         tap( v => console.log('tap ' + v)),
-        filter(v => v % 2 === 0),
-        map( v => v + 1)
+        filter(v => v % 2 === 0),         // -------2-------4|
+        map( v => v + 10)                   // -------12------14|
       )
       .subscribe( v => console.log('sub ' + v));
 
